@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Radial_Progress" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6S8-Rs-Dne" customClass="RadialProgressView" customModule="Radial_Progress" customModuleProvider="target">
+                                <rect key="frame" x="180" y="180" width="240" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="Afe-r4-xwx"/>
+                                    <constraint firstAttribute="width" constant="240" id="TO1-Dk-Gju"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="sliceSize">
+                                        <real key="value" value="0.20000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dO-jF-apm">
+                                <rect key="frame" x="226" y="550" width="149" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="149" id="Jod-Av-V4A"/>
+                                    <constraint firstAttribute="height" constant="30" id="PQc-5f-60b"/>
+                                </constraints>
+                                <state key="normal" title="Demo"/>
+                                <connections>
+                                    <action selector="demoFunctionality:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sd0-HL-diF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8dO-jF-apm" secondAttribute="bottom" constant="20" id="2Bu-c0-jLJ"/>
+                            <constraint firstItem="8dO-jF-apm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CD0-4R-6sj"/>
+                            <constraint firstItem="6S8-Rs-Dne" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X9R-rR-4rb"/>
+                            <constraint firstItem="6S8-Rs-Dne" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="tiI-xG-gfb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="progress" destination="6S8-Rs-Dne" id="DbP-Mi-VGV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="564" y="357"/>
+        </scene>
+    </scenes>
+</document>
