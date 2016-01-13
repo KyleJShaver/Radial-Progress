@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +27,16 @@ class ViewController: UIViewController {
     
     @IBAction func demoFunctionality(sender: AnyObject?) {
         updateSlice()
+        
+        
+        // This code snipet allows you to configure a callback to be performed if a fill command finishes
+        //   with the fillValue being 1.0. In this case, it would cancel the slice over 0.4 seconds
+        /*
+        progress.callback = {
+            self.progress.cancel(0.4)
+        }
+        */
+        
         NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "instant", userInfo: nil, repeats: false)
         NSTimer.scheduledTimerWithTimeInterval(2.2, target: self, selector: "instant2", userInfo: nil, repeats: false)
         NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "cancel", userInfo: nil, repeats: false)

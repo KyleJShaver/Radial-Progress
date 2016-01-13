@@ -35,6 +35,13 @@ import UIKit
     private var emptyCircle: CAShapeLayer = CAShapeLayer()
     private var progressSlice: RadialProgressSliceLayer = RadialProgressSliceLayer()
     
+    // The callback is called immediately after the slice fill becomes 1.0
+    public var callback :(() -> Void)? = nil {
+        didSet {
+            progressSlice.callback = callback
+        }
+    }
+    
     @IBInspectable public var emptyColor: UIColor! = UIColor(white: 199.0/255.0, alpha: 1.0) {
         didSet { setNeedsDisplay() }
     }
@@ -72,6 +79,7 @@ import UIKit
         emptyCircle.fillColor = emptyColor.CGColor
         self.layer.addSublayer(emptyCircle)
         progressSlice = RadialProgressSliceLayer(frame: circleFrame)
+        progressSlice.callback = callback
         progressSlice.strokeColor = sliceColor.CGColor;
         progressSlice.fillColor = UIColor.clearColor().CGColor
         self.layer.addSublayer(progressSlice)
@@ -118,6 +126,10 @@ class RadialProgressSliceLayer: CAShapeLayer {
     
     private var strokeEndStore: CGFloat = 0.0
     private var strokeColorStore: CGColor?
+    
+    // The callback is called immediately after the slice fill becomes 1.0
+    internal var callback :(() -> Void)?
+    
     var isPaused: Bool {
         return speed == 0
     }
@@ -162,13 +174,27 @@ class RadialProgressSliceLayer: CAShapeLayer {
         animation.fillMode = kCAFillModeForwards
         animation.removedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.delegate = self
         addAnimation(animation, forKey: animation.keyPath)
+    }
+    
+    // Handles the completion of animated slice filling
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        performCallback()
+    }
+    
+    // Performs the callback function if the slice is full
+    func performCallback() {
+        if callback != nil && strokeEnd == 1.0 {
+            callback!()
+        }
     }
     
     // Sets the slice to a specified size with a very slight animation
     func setInstantSliceFill(fillValue: Double) {
         removeAllAnimations()
         strokeEnd = CGFloat(fillValue)
+        performCallback()
     }
     
     // Pauses all animations. Current animation state will persist
